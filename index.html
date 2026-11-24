@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>US-Vietnam UFLPA &amp; CBP CF 28 Pre-Detention BOM Pre-Scan (Zero-Upload)</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="privacy-bar" class="privacy-bar" role="status">
+    <span class="privacy-dot" aria-hidden="true"></span>
+    <span>100% Browser-Local Analysis &#8212; Your CSV files never leave your browser; zero data uploaded to any server; zero ACE or ERP passwords ever requested.</span>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <div>
+        <span class="brand-badge">2026 US-VIETNAM UFLPA (19 U.S.C. &sect; 1307) &times; CBP CF 28/29 (19 U.S.C. &sect; 1509)</span>
+        <h1>15-Second Zero-Password UFLPA &amp; AD/CVD BOM Pre-Scan</h1>
+        <p class="subtitle">Screen Vietnam-origin U.S. ocean entries and multi-tier bills of materials locally for 2026 UFLPA high-risk HTS-4 exposure, Sec. 781 anti-circumvention deposit bands (25%&ndash;200%+), 30-day CBP CF 28 evidence gaps, and Bilingual (EN/VI) Tier-2 supplier document requests.</p>
+      </div>
+      <div class="price-callout">
+        <div class="price-big">$1,695 Flat Fee</div>
+        <div class="price-sub">Fixed non-contingent fee &bull; 0% commission &bull; Full human-QA Pre-Detention Pack</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="legal-disclaimer-banner" class="disclaimer-banner" aria-label="Mandatory Legal and Fee Disclosure">
+      <strong>MANDATORY DISCLOSURE &#8212; Independent Non-Audit, Non-Legal &amp; Non-Contingent Service:</strong>
+      This browser-local pre-scan and the optional $1,695.00 full pre-detention pack are fixed flat non-contingent fee documentation workpapers (0% commission; never a contingent fee, never percentage-based on duties avoided or shipment value). We are an independent non-audit, non-legal preparation provider: we are not a licensed customs broker under 19 U.S.C. &sect; 1641, do not offer CBP Form 7501 or Form 3461 entry filing, and never participate in broker fee-splitting under 19 CFR &sect; 111.36(b). Output is not legal advice, does not provide legal representation or admissibility determinations, and does not perform direct CBP Form 28 or Form 29 filing; deliver workpapers to your compliance officer, customs broker, or trade counsel. Never share ACE, ERP, or broker portal passwords. Vietnam Circular 31/2026/TT-BCT / VeriGoods is referenced solely as an optional secondary note for electronics (Ch. 85) and chemical/polymer inputs (Ch. 28/29/39), never as a universal Vietnam export mandate.
+    </section>
+
+    <section id="step-1" class="card interactive-only">
+      <div class="step-header">
+        <span class="step-num">Step 1</span>
+        <h2>Choose Screening Mode (Cold-Start No-BOM or Full Multi-Tier BOM)</h2>
+      </div>
+
+      <div class="mode-toggle" role="group" aria-label="Select Entry A or Entry B mode">
+        <button type="button" id="mode-entry-a" class="mode-btn is-active" data-mode="ENTRY_A">
+          <strong>Entry A: Cold-Start No-BOM Pre-Screen (15 Seconds)</strong>
+          <span>Upload US ACE Entry Summary / HTS-4 CSV (+ optional VN Tier-1 factory CSV) &rarr; exposure summary, $250k qualification check, and Bilingual (EN/VI) Tier-2 Supplier Document Checklists.</span>
+        </button>
+        <button type="button" id="mode-entry-b" class="mode-btn" data-mode="ENTRY_B">
+          <strong>Entry B: Full Multi-Tier BOM Penetration &amp; CF 28 Gap Matrix</strong>
+          <span>Upload ACE Entries CSV + <code>sku_bom.csv</code> &rarr; CN / XUAR_RISK / UNVERIFIED / VN / OTHER cost% &amp; weight% split, 100% BOM reconciliation check, and 30-day CBP CF 28 gap matrix.</span>
+        </button>
+      </div>
+
+      <div class="sample-bar">
+        <span class="sample-bar-label">1-Click Embedded Sample Data (Runs 100% Offline in Browser Memory):</span>
+        <div class="button-row">
+          <button type="button" id="load-sample-qualified" class="btn btn-primary">Load Qualified Multi-Sector Sample ($1.57M Exposed)</button>
+          <button type="button" id="load-sample-below" class="btn btn-secondary">Load Below-$250k Sample ($118.5k Exposed)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="step-2" class="card interactive-only">
+      <div class="step-header">
+        <span class="step-num">Step 2</span>
+        <h2>Drag &amp; Drop Local CSVs (Zero Server Upload &bull; Automatic Local PII/Secret Shield)</h2>
+      </div>
+
+      <div id="upload-grid" class="upload-grid">
+        <div id="dropzone-ace" class="dropzone" tabindex="0">
+          <p class="dropzone-title">1. ACE Entry Summary / HTS-4 CSV (Required)</p>
+          <p class="dropzone-sub">Columns: <code>entry_ref, hts_code, cif_usd, vn_supplier_name, sku_id, declared_origin</code></p>
+          <label for="file-ace" class="btn btn-outline btn-sm file-label">
+            Choose ACE CSV
+            <input id="file-ace" type="file" accept=".csv,text/csv" class="file-input-hidden">
+          </label>
+          <div id="status-ace" class="file-status">No ACE CSV loaded yet.</div>
+        </div>
+
+        <div id="dropzone-factory" class="dropzone" tabindex="0">
+          <p class="dropzone-title">2. VN Tier-1 Factory List CSV (Optional)</p>
+          <p class="dropzone-sub">Columns: <code>vn_supplier_name, factory_code, province, sector</code></p>
+          <label for="file-factory" class="btn btn-outline btn-sm file-label">
+            Choose Factory CSV
+            <input id="file-factory" type="file" accept=".csv,text/csv" class="file-input-hidden">
+          </label>
+          <div id="status-factory" class="file-status">Optional &#8212; enriches bilingual checklists.</div>
+        </div>
+
+        <div id="dropzone-bom" class="dropzone" tabindex="0" hidden>
+          <p class="dropzone-title">3. Multi-Tier SKU BOM CSV (Required for Entry B)</p>
+          <p class="dropzone-sub">Columns: <code>sku_id, component_id, component_hs6, origin_country, cost_pct, weight_pct, tier2_mill_id, traceability_doc_ref</code></p>
+          <label for="file-bom" class="btn btn-outline btn-sm file-label">
+            Choose SKU BOM CSV
+            <input id="file-bom" type="file" accept=".csv,text/csv" class="file-input-hidden">
+          </label>
+          <div id="status-bom" class="file-status">No SKU BOM CSV loaded yet.</div>
+        </div>
+      </div>
+
+      <div id="pii-alert" class="pii-alert" role="alert" hidden>
+        <strong>Blocked by Local PII &amp; Credential Shield</strong>
+        <p>Sensitive values (EIN, SSN, ACE/ERP passwords, emails, or prohibited column headers) were detected inside your browser. Screening halted before evaluation; strip sensitive fields and retry:</p>
+        <ul id="pii-findings-list"></ul>
+      </div>
+
+      <div id="error-alert" class="pii-alert" role="alert" hidden>
+        <strong>CSV Validation Notice</strong>
+        <p id="error-alert-text"></p>
+      </div>
+
+      <div class="run-bar">
+        <span style="font-size:12.5px; color:#475569;">All parsing uses exact integer-cent &amp; basis-point arithmetic via browser <code>FileReader</code> API.</span>
+        <button type="button" id="run-prescan-btn" class="btn btn-primary">Run Browser-Local Pre-Scan</button>
+      </div>
+    </section>
+
+    <section id="step-3" class="card result-section" hidden>
+      <div class="print-only print-header">
+        <h2>Executive UFLPA (19 U.S.C. &sect; 1307) &amp; CBP CF 28/29 Risk Memo</h2>
+        <p class="print-privacy">100% Browser-Local Analysis &#8212; Zero data uploaded to any server &bull; Fixed $1,695.00 Flat Non-Contingent Fee (0% Commission)</p>
+      </div>
+
+      <div class="step-header conclusion-header">
+        <div>
+          <span class="step-num">Step 3</span>
+          <h2>15-Second Traceable Exposure &amp; CF 28 Readiness Summary</h2>
+        </div>
+        <div id="verdict-badge" class="verdict-badge">-</div>
+      </div>
+
+      <div class="meta-strip">
+        <div><strong>Mode:</strong> <span id="res-mode">-</span></div>
+        <div><strong>Source:</strong> <span id="res-source">-</span></div>
+        <div><strong>Processing Speed:</strong> <span id="res-elapsed">0 ms</span> (local)</div>
+        <div><strong>Deterministic Fingerprint:</strong> <code id="res-fingerprint">-</code></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">High-Risk Exposed CIF</div>
+          <div id="kpi-exposed-cif" class="kpi-value">$0.00</div>
+          <div id="kpi-total-cif-sub" class="kpi-sub">Total CIF screened: $0.00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Est. AD/CVD &amp; Sec. 781 Risk</div>
+          <div id="kpi-adcvd-mid" class="kpi-value">$0.00</div>
+          <div id="kpi-adcvd-band" class="kpi-sub">Band: $0.00 &ndash; $0.00 (25%&ndash;200%+)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CF 28 Gaps / Suppliers</div>
+          <div id="kpi-gaps-main" class="kpi-value">0</div>
+          <div id="kpi-gaps-sub" class="kpi-sub">30-day CBP CF 28 response window</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Fixed Flat Fee vs Exposure</div>
+          <div class="kpi-value">$1,695.00</div>
+          <div id="kpi-roi-sub" class="kpi-sub">0% commission &bull; 0.0x vs mid deposit</div>
+        </div>
+      </div>
+
+      <div id="bom-bucket-strip" class="bucket-grid" hidden>
+        <div class="bucket-card is-red">
+          <div class="bucket-label">XUAR Priority Risk</div>
+          <div id="bkt-xuar" class="bucket-val">$0.00</div>
+        </div>
+        <div class="bucket-card is-amber">
+          <div class="bucket-label">CN Upstream (Doc'd)</div>
+          <div id="bkt-cn" class="bucket-val">$0.00</div>
+        </div>
+        <div class="bucket-card is-amber">
+          <div class="bucket-label">Unverified / No BOM</div>
+          <div id="bkt-unver" class="bucket-val">$0.00</div>
+        </div>
+        <div class="bucket-card is-green">
+          <div class="bucket-label">Verified Vietnam</div>
+          <div id="bkt-vn" class="bucket-val">$0.00</div>
+        </div>
+        <div class="bucket-card">
+          <div class="bucket-label">Verified 3rd Country</div>
+          <div id="bkt-other" class="bucket-val">$0.00</div>
+        </div>
+      </div>
+
+      <div id="circular31-box" class="advisory-box" hidden>
+        <strong>Optional Secondary Reference (Electronics Ch. 85 / Chemicals Ch. 28-29-39 Only):</strong>
+        <span id="circular31-text"></span>
+      </div>
+
+      <div class="actions-bar interactive-only">
+        <button type="button" id="btn-print-memo" class="btn btn-primary">Print 1-Page Executive Memo</button>
+        <button type="button" id="btn-dl-memo-html" class="btn btn-secondary">Download 1-Page HTML Memo</button>
+        <button type="button" id="btn-dl-checklists-txt" class="btn btn-outline">Download EN/VI Checklists (.txt)</button>
+        <button type="button" id="btn-dl-checklists-csv" class="btn btn-outline">Download EN/VI Checklists (.csv)</button>
+        <button type="button" id="btn-dl-bom-csv" class="btn btn-outline" hidden>Download BOM Split (.csv)</button>
+        <button type="button" id="btn-dl-gap-csv" class="btn btn-outline" hidden>Download CF 28 Gap Matrix (.csv)</button>
+        <button type="button" id="btn-dl-summary-json" class="btn btn-outline">Download audit_summary.json</button>
+      </div>
+
+      <div id="result-tabs" class="tabs-bar interactive-only" role="tablist">
+        <button type="button" class="tab-btn is-active" data-tab="overview">Entries &amp; Sector Exposure</button>
+        <button type="button" class="tab-btn" data-tab="checklists">Bilingual (EN/VI) VN Supplier Checklists</button>
+        <button type="button" id="tab-btn-bom" class="tab-btn" data-tab="bom" hidden>Multi-Tier BOM Origin Split (100% Check)</button>
+        <button type="button" id="tab-btn-gaps" class="tab-btn" data-tab="gaps" hidden>30-Day CF 28 Gap Matrix</button>
+      </div>
+
+      <div id="panel-overview" class="tab-panel">
+        <h3 style="margin:0 0 8px 0; font-size:15px;">Sector Exposure &amp; Vietnam AD/CVD Cash Deposit Bands</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Sector (2026 UFLPA / Sec. 781 Scope)</th>
+                <th class="num">Entries</th>
+                <th class="num">Entered CIF</th>
+                <th class="num">AD/CVD Low</th>
+                <th class="num">AD/CVD Mid</th>
+                <th class="num">AD/CVD High</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-sectors"></tbody>
+          </table>
+        </div>
+
+        <h3 style="margin:12px 0 8px 0; font-size:15px;">Entry-Level HTS-4 Screening</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Entry Ref</th>
+                <th>SKU</th>
+                <th>HTS-4</th>
+                <th>VN Supplier</th>
+                <th class="num">CIF USD</th>
+                <th>UFLPA Risk</th>
+                <th class="num">AD/CVD Band (Mid)</th>
+                <th>Case / Statute Context</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-entries"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-checklists" class="tab-panel interactive-only" hidden>
+        <p style="margin:0 0 10px 0; font-size:13px; color:#475569;">Grouped per Vietnam Tier-1 supplier and tailored to exact HTS-4 headings supplied. Copy and dispatch to factory compliance contacts ahead of any 30-day CBP Form 28 request.</p>
+        <div id="checklists-container"></div>
+      </div>
+
+      <div id="panel-bom" class="tab-panel" hidden>
+        <h3 style="margin:0 0 8px 0; font-size:15px;">Per-SKU Multi-Tier Cost% &amp; Weight% Origin Split + 100% Reconciliation</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>100% Recon</th>
+                <th class="num">Cost Sum</th>
+                <th class="num">XUAR Risk %</th>
+                <th class="num">CN %</th>
+                <th class="num">Unverified %</th>
+                <th class="num">VN %</th>
+                <th class="num">Other %</th>
+                <th class="num">Missing Mills / Docs</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-bom"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="panel-gaps" class="tab-panel" hidden>
+        <h3 style="margin:0 0 8px 0; font-size:15px;">30-Day CBP CF 28 Evidence Gap Matrix (Per Entry / SKU)</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Entry / SKU</th>
+                <th>HTS-4</th>
+                <th>VN Supplier</th>
+                <th class="num">CIF USD</th>
+                <th>Risk Tier</th>
+                <th>BOM 100%</th>
+                <th>CF 28 Gaps Identified</th>
+                <th class="num">AD/CVD Mid Risk</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-gaps"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mailto-box interactive-only">
+        <div class="mailto-header">
+          <div>
+            <h3>Request the $1,695 Human-QA Pre-Detention Pack (Summary Only &#8212; Zero Raw CSV Attached)</h3>
+            <p style="margin:3px 0 0 0; font-size:12.5px; color:#475569;">Opens your local email client to <code>trace@uflpa.far31prescan.com</code> with aggregate KPI summary and fingerprint only. Never send raw ACE credentials or passwords.</p>
+          </div>
+          <div class="button-row">
+            <a id="mailto-link" href="mailto:trace@uflpa.far31prescan.com" class="btn btn-primary">Email Summary to trace@uflpa.far31prescan.com</a>
+            <button type="button" id="copy-summary-btn" class="btn btn-outline">Copy Summary Text</button>
+          </div>
+        </div>
+        <pre id="mailto-preview" class="mailto-preview"></pre>
+      </div>
+
+      <div class="print-only print-footer">
+        <strong>MANDATORY DISCLOSURE:</strong> Independent non-audit, non-legal preparation workpaper: not a licensed customs broker under 19 U.S.C. &sect; 1641, not legal advice, does not provide legal representation or CBP Form 28/7501 filing, never participates in broker fee-splitting under 19 CFR &sect; 111.36(b), fixed $1,695.00 flat non-contingent fee (0% commission).
+      </div>
+    </section>
+
+    <section id="comparison" class="card interactive-only">
+      <div class="step-header">
+        <span class="step-num">Compare</span>
+        <h2>How This $1,695 Pre-Detention Pack Compares to Existing Market Options</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table comparison-table">
+          <thead>
+            <tr>
+              <th>Capability / Commercial Terms</th>
+              <th class="highlight-col">UFLPA &times; CF 28 BOM Pre-Scan Pack (This Tool)</th>
+              <th>Exiger ForcedLabor.ai ($0 Public Tool)</th>
+              <th>HTS Hero ($9&ndash;$49/mo Duty Guard / $39&ndash;$89/mo Suite)</th>
+              <th>Enterprise Suites (Sourcemap, Altana, Kharon, Sayari, TrusTrace)</th>
+              <th>Trade Crisis Law Firms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Price &amp; Fee Structure</strong></td>
+              <td class="highlight-col">$0 browser pre-screen; <strong>$1,695 flat non-contingent fee</strong> (0% commission)</td>
+              <td>$0 public lookup</td>
+              <td>$9&ndash;$49/mo (Duty Guard) or $39&ndash;$89/mo (Classification)</td>
+              <td>$50,000&ndash;$250,000+/yr annual contract</td>
+              <td>$15,000&ndash;$75,000+ per detention / CF 28 matter</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-SKU BOM Cost% &amp; Weight% Split</strong></td>
+              <td class="highlight-col">Yes (CN / XUAR_RISK / UNVERIFIED / VN / OTHER + 100% check)</td>
+              <td>No (single-entity name lookup only)</td>
+              <td>No (tariff classification &amp; duty rates only)</td>
+              <td>Yes (after multi-month enterprise onboarding)</td>
+              <td>Manual hourly paralegal / attorney spreadsheets</td>
+            </tr>
+            <tr>
+              <td><strong>Vietnam AD/CVD &amp; Sec. 781 Deposit Bands</strong></td>
+              <td class="highlight-col">Yes (25%&ndash;200%+ HTS-4 bands across Ch. 44/94, 72/73/76, 85, 61/62/64)</td>
+              <td>No</td>
+              <td>Duty rate lookup only (no Tier-2 circumvention BOM check)</td>
+              <td>Optional paid modules</td>
+              <td>Custom legal opinion (billed hourly)</td>
+            </tr>
+            <tr>
+              <td><strong>30-Day CBP CF 28 Gap Matrix &amp; Bilingual EN/VI VN Factory Checklists</strong></td>
+              <td class="highlight-col">Yes (15-second pre-screen + &le;10 MB pack &amp; 1-page Executive Memo)</td>
+              <td>No</td>
+              <td>No</td>
+              <td>Enterprise workflow portal required</td>
+              <td>Drafted reactively after CBP detention</td>
+            </tr>
+            <tr>
+              <td><strong>Zero Passwords / Local Privacy</strong></td>
+              <td class="highlight-col">100% browser-local pre-screen; zero ACE/ERP passwords</td>
+              <td>Cloud web search</td>
+              <td>Cloud SaaS account</td>
+              <td>ERP/API integration required</td>
+              <td>Manual email / dataroom exchange</td>
+            </tr>
+            <tr>
+              <td><strong>Legal / Broker Scope</strong></td>
+              <td class="highlight-col">Non-audit, non-legal prep workpapers (not a licensed customs broker; not legal advice; no CBP filing)</td>
+              <td>Public screening info</td>
+              <td>Classification software</td>
+              <td>Enterprise compliance platform</td>
+              <td>Licensed trade counsel &amp; formal CBP CF 28 filings</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container site-footer">
+    <p>
+      <strong>UFLPA &times; CF 28 BOM Pre-Scan</strong> &bull; Contact: <a href="mailto:trace@uflpa.far31prescan.com">trace@uflpa.far31prescan.com</a> &bull;
+      Independent non-audit, non-legal documentation readiness tool: not a licensed customs broker under 19 U.S.C. &sect; 1641, not legal advice, does not provide legal representation or CBP filing, zero broker fee-splitting under 19 CFR &sect; 111.36(b), fixed $1,695.00 flat non-contingent fee (0% commission). 100% browser-local screening with zero server upload.
+    </p>
+  </footer>
+
+  <script src="./rules_data.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./samples.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
